@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: metallb
+  annotations:
+    argocd.argoproj.io/sync-wave: 1
 spec:
   destination:
     namespace: metallb-system
@@ -33,7 +35,7 @@ metadata:
   name: main
   namespace: metallb-system
   annotations:
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: 2
 spec:
   addresses: 
     - 192.168.1.4/32

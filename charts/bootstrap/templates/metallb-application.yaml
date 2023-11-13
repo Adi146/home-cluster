@@ -26,3 +26,14 @@ spec:
     name: addresspools.metallb.io
     jsonPointers:
     - /spec/conversion/webhook/clientConfig/caBundle
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: main
+  namespace: metallb-system
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  addresses: 
+    - 192.168.4.0/24

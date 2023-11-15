@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: cilium
+    helm:
+      parameters:
+      - name: operator.replicas
+        value: "1"
+      values: 'kubeProxyReplacement: true'
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.14.3

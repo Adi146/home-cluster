@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: unbound
+spec:
+  destination:
+    namespace: unbound
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/unbound
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: local_zone
+          value: {{ .Values.domain }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

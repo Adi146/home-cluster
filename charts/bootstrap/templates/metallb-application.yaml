@@ -38,6 +38,8 @@ spec:
   addresses: 
     - 192.168.1.4/32
     - 192.168.1.5/32
+    - 192.168.1.6/32
+  autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1
 kind: L2Advertisement

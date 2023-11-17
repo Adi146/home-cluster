@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: unifi-controller
+spec:
+  destination:
+    namespace: unifi-controller
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/unifi-controller
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: unifi-controller.{{ .Values.domain }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

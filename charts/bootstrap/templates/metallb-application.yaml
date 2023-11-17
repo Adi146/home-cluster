@@ -36,9 +36,10 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   addresses: 
-    - 192.168.1.4/32
-    - 192.168.1.5/32
-    - 192.168.1.6/32
+    - 192.168.1.4/32 # ingress-nginx-internal
+    - 192.168.1.5/32 # unbound
+    - 192.168.1.6/32 # ingress-nginx-external
+    - 192.168.1.7/32 # unifi-controller
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1

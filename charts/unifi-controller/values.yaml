@@ -1,0 +1,2 @@
+hostNetwork: false
+domain: unifi-controller.example.com

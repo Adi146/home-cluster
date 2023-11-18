@@ -14,6 +14,7 @@ spec:
       - name: installCRDs
         value: "true"
       values: |-
+        podDnsPolicy: None
         podDnsConfig:
           nameservers:
             - 8.8.8.8

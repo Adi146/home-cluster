@@ -13,6 +13,10 @@ spec:
       parameters:
       - name: installCRDs
         value: "true"
+      values: |-
+        podDnsConfig:
+          nameservers:
+            - 8.8.8.8
     repoURL: https://charts.jetstack.io
     targetRevision: v1.13.2
   syncPolicy:

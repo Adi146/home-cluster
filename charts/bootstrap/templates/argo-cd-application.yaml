@@ -21,3 +21,29 @@ spec:
   project: default
   syncPolicy:
     automated: null
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-cd-ing
+  namespace: argo-cd
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx-internal
+  tls:
+  - hosts:
+    - argo-cd.{{ .Values.domain }}
+    secretName: argo-cd-tls-secret
+  rules:
+  - host: argo-cd.{{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: argo-cd-argocd-server
+            port:
+              name: https

@@ -5,5 +5,8 @@
   ],
   "argocd": {
     "fileMatch": ["application\\.yaml$"]
-  }  
+  } ,
+  "kubernetes": {
+    "fileMatch": ["templates/.+\\.yaml$"]
+  }
 }

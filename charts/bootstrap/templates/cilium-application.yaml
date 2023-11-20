@@ -18,3 +18,5 @@ spec:
       values: 'kubeProxyReplacement: true'
     repoURL: https://helm.cilium.io/
     targetRevision: 1.14.4
+  syncPolicy:
+    automated: {}

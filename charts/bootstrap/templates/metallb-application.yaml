@@ -12,7 +12,7 @@ spec:
     chart: metallb
   project: default
   syncPolicy:
-    automated: null
+    automated: {}
     syncOptions:
       - CreateNamespace=true
   ignoreDifferences:

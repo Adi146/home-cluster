@@ -17,4 +17,4 @@ spec:
         value: cronJob
       values: 'kubeProxyReplacement: true'
     repoURL: https://helm.cilium.io/
-    targetRevision: 1.14.3
+    targetRevision: 1.14.4

@@ -3,7 +3,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: unifi-controller-ing
-  namespace: unifi-controller
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: HTTPS
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -23,4 +22,4 @@ spec:
           service:
             name: unifi-controller-svc
             port:
-              number: 8443
+              name: default-console

@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: unifi-controller-pvc
-  namespace: unifi-controller
 spec:
   storageClassName: nfs-client
   accessModes:

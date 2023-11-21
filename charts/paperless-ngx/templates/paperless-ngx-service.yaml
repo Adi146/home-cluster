@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless-ngx-svc
+spec:
+  ports:
+    - name: web
+      port: 8000
+  selector:
+    app: paperless-ngx

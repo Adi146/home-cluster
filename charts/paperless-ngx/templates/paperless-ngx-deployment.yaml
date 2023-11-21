@@ -1,0 +1,45 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: paperless-ngx
+  labels:
+    app: paperless-ngx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless-ngx
+  template:
+    metadata:
+      labels:
+        app: paperless-ngx
+    spec:
+      containers:
+        - name: paperless-ngx
+          image: ghcr.io/paperless-ngx/paperless-ngx:1.17.0
+          volumeMounts:
+            - name: paperless-ngx-media
+              mountPath: /usr/src/paperless/media
+          env: 
+            - name: PAPERLESS_DBHOST
+              value: paperless-ngx-db-svc
+            - name: PAPERLESS_REDIS
+              value: redis://paperless-ngx-redis-svc:6379
+            - name: PAPERLESS_URL
+              value: https://{{ .Values.domain }}
+          resources:
+            requests:
+              memory: 1.5Gi
+            limits:
+              memory: 1.5Gi
+          ports:
+            - name: web
+              containerPort: 8000
+              protocol: TCP
+      volumes:
+      - name: paperless-ngx-media
+        persistentVolumeClaim:
+          claimName: paperless-ngx-media-pvc 
+
+

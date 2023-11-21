@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: esphome
+spec:
+  destination:
+    namespace: esphome
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/esphome
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: esphome.{{ .Values.domain }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}

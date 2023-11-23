@@ -32,6 +32,11 @@ spec:
             - name: web
               containerPort: 8123
               protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                - NET_RAW
+                - NET_BIND_SERVICE
       volumes:
         - name: home-assistant-volume
           persistentVolumeClaim:

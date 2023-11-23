@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: unifi-controller-svc
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.7
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
 spec:
   type: LoadBalancer
   ports:

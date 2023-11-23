@@ -1,3 +1,4 @@
+{{ if .Values.unbound.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -14,8 +15,11 @@ spec:
       parameters:
         - name: local_zone
           value: {{ .Values.domain }}
+        - name: loadBalancerIP
+          value: {{ .Values.unbound.loadBalancerIP }}
   project: default
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     automated: {}
+{{ end }}

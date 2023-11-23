@@ -1,2 +1,18 @@
 domain: example.com
 mail_address: mail@example.com
+
+external_ingress:
+  enabled: true
+  loadBalancerIP: 192.168.1.6
+
+internal_ingress:
+  enabled: true
+  loadBalancerIP: 192.168.1.4
+
+unifi_controller:
+  enabled: true
+  loadBalancerIP: 192.168.1.7
+
+unbound:
+  enabled: true
+  loadBalancerIP: 192.168.1.5

@@ -1,3 +1,4 @@
+{{ if .Values.unifi_controller.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -14,8 +15,11 @@ spec:
       parameters:
         - name: domain
           value: unifi-controller.{{ .Values.domain }}
+        - name: loadBalancerIP
+          value: {{ .Values.unifi_controller.loadBalancerIP }}
   project: default
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     automated: {}
+{{ end }}

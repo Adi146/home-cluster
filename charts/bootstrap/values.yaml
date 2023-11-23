@@ -16,3 +16,6 @@ unifi_controller:
 unbound:
   enabled: true
   loadBalancerIP: 192.168.1.5
+
+home_assistant:
+  enabled: true

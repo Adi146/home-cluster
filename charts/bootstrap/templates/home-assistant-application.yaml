@@ -1,0 +1,23 @@
+{{ if .Values.home_assistant.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: home-assistant
+spec:
+  destination:
+    namespace: home-assistant
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/home-assistant
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: home-assistant.{{ .Values.domain }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}
+{{ end }}

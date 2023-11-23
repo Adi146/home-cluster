@@ -1,0 +1,43 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: home-assistant-db
+  labels:
+    app: home-assistant-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant-db
+  template:
+    metadata:
+      labels:
+        app: home-assistant-db
+    spec:
+      containers:
+        - name: db
+          image: postgres:16.1-alpine
+          volumeMounts:
+            - name: home-assistant-db-volume
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: POSTGRES_DB
+              value: home-assistant
+            - name: POSTGRES_USER
+              value: home-assistant
+            - name: POSTGRES_PASSWORD
+              value: home-assistant
+          resources:
+            requests:
+              memory: 200Mi
+            limits:
+              memory: 200Mi
+          ports:
+            - name: db
+              containerPort: 5432
+              protocol: TCP
+      volumes:
+      - name: home-assistant-db-volume
+        persistentVolumeClaim:
+          claimName: home-assistant-db-pvc

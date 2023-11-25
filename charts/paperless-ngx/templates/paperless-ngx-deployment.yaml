@@ -38,8 +38,8 @@ spec:
               containerPort: 8000
               protocol: TCP
       volumes:
-      - name: paperless-ngx-media
-        persistentVolumeClaim:
-          claimName: paperless-ngx-media-pvc 
+        - name: paperless-ngx-media
+          persistentVolumeClaim:
+            claimName: paperless-ngx-media-pvc 
 
 

@@ -17,6 +17,8 @@ spec:
           value: {{ .Values.domain }}
         - name: loadBalancerIP
           value: {{ .Values.unbound.loadBalancerIP }}
+        - name: ingressIP
+          value: {{ .Values.internal_ingress.loadBalancerIP }}
   project: default
   syncPolicy:
     syncOptions:

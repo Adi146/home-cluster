@@ -1,3 +1,4 @@
 local_zone: example.com
 loadBalancerIP:
 ingressIP:
+unifiIP:

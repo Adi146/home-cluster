@@ -19,6 +19,8 @@ spec:
           value: {{ .Values.unbound.loadBalancerIP }}
         - name: ingressIP
           value: {{ .Values.internal_ingress.loadBalancerIP }}
+        - name: unifiIP
+          value: {{ .Values.unifi_controller.loadBalancerIP }}
   project: default
   syncPolicy:
     syncOptions:

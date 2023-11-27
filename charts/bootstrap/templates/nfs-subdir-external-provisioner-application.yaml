@@ -1,3 +1,4 @@
+{{ if .Values.nfs_subdir_external_provisioner.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -13,9 +14,9 @@ spec:
     helm:
       parameters:
       - name: nfs.path
-        value: /data
+        value: {{ .Values.nfs_subdir_external_provisioner.path }}
       - name: nfs.server
-        value: 192.168.1.2
+        value: {{ .Values.nfs_subdir_external_provisioner.server }}
       - name: storageClass.onDelete
         value: retain
       - name: storageClass.pathPattern
@@ -26,3 +27,4 @@ spec:
     syncOptions:
     - CreateNamespace=true
     automated: {}
+{{ end }}

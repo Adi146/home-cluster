@@ -1,18 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: unifi-controller-svc
+  name: unifi-controller-tcp-svc
   annotations:
     metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
+    metallb.universe.tf/allow-shared-ip: "unifi-controller"
 spec:
   type: LoadBalancer
   ports:
     - name: device-comm
       port: 8080
       protocol: TCP
-    - name: stun
-      port: 3478
-      protocol: UDP
     - name: default-console
       port: 8443
       protocol: TCP
@@ -25,6 +23,22 @@ spec:
     - name: speedtest
       port: 6789
       protocol: TCP
+  selector:
+    app: unifi-controller
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi-controller-udp-svc
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
+    metallb.universe.tf/allow-shared-ip: "unifi-controller"
+spec:
+  type: LoadBalancer
+  ports:
+    - name: stun
+      port: 3478
+      protocol: UDP
     - name: unifi-disc
       port: 10001
       protocol: UDP

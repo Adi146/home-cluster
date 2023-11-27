@@ -20,6 +20,6 @@ spec:
         path: /
         backend:
           service:
-            name: unifi-controller-svc
+            name: unifi-controller-tcp-svc
             port:
               name: default-console

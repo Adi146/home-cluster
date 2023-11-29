@@ -63,5 +63,5 @@ data:
      local-data-ptr: "{{ .Values.ingressIP }} {{ .Values.local_zone }}"
 
      local-zone: "unifi" redirect
-     local-data: "unifi IN A {{ .Values.unifiIP }}""
+     local-data: "unifi IN A {{ .Values.unifiIP }}"
      local-data-ptr: "{{ .Values.unifiIP }} unifi"

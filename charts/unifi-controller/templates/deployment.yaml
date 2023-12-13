@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: unifi-controller
-          image: linuxserver/unifi-controller:8.0.7
+          image: linuxserver/unifi-controller:8.0.24
           volumeMounts:
             - name: unifi-controller-volume
               mountPath: /config

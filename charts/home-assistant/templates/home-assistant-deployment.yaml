@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: home-assistant
-          image: ghcr.io/home-assistant/home-assistant:2024.1.0
+          image: ghcr.io/home-assistant/home-assistant:2024.1.1
           volumeMounts:
           - name: home-assistant-volume
             mountPath: /config

@@ -8,7 +8,7 @@
   } ,
   "kubernetes": {
     "fileMatch": ["templates/.+\\.yaml$"]
-  }
+  },
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],

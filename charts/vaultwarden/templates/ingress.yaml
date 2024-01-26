@@ -22,3 +22,29 @@ spec:
             name: vaultwarden-svc
             port:
               name: web
+{{ if .Values.external_ingress.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden-external-ing
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx-external
+  tls:
+  - hosts:
+    - {{ .Values.domain }}
+    secretName: vaultwarden-tls-secret
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: vaultwarden-svc
+            port:
+              name: web
+{{ end }}

@@ -1,1 +1,6 @@
 domain: vaultwarden.example.com
+
+signups_allowed: true
+
+external_ingress:
+  enabled: false

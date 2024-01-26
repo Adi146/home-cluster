@@ -23,7 +23,7 @@ spec:
           mountPath: /data
         env:
         - name: SIGNUPS_ALLOWED
-          value: "false"
+          value: {{ .Values.signups_allowed | quote }}
         resources:
           requests:
             memory: 200Mi

@@ -1,4 +1,5 @@
 domain: pihole.example.com
+loadBalancerIP: 
 
 nodeName: ""
 hostNetwork: false 

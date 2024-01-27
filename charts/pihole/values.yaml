@@ -1,0 +1,29 @@
+domain: pihole.example.com
+
+nodeName: ""
+hostNetwork: false 
+
+TZ: UTC
+
+dhcp:
+  active: false
+
+pihole:
+  domain: lan
+  dns_: 8.8.8.8;8.8.4.4
+
+webtheme: default-light
+
+web_port: 80
+
+ftlconf:
+  port: 4711
+
+block_icloud_pr:  true
+
+dnsmasq_listening:
+
+dnsmasq_config:
+
+initContainers:
+

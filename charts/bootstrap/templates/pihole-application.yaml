@@ -1,0 +1,27 @@
+{{ if .Values.pihole.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pihole
+spec:
+  destination:
+    namespace: pihole
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/pihole
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: pihole.{{ .Values.domain }}
+        - name: webtheme
+          value: default-dark
+        - name: pihole.dns_
+          value: {{ .Values.unbound.loadBalancerIP }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}
+{{ end }}

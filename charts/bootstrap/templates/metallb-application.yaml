@@ -48,6 +48,9 @@ spec:
     {{- if .Values.unifi_controller.enabled }}
     - {{ .Values.unifi_controller.loadBalancerIP }}/32 # unifi-controller
     {{- end}}
+    {{- if .Values.pihole.enabled }}
+    - {{ .Values.pihole.loadBalancerIP }}/32 # pihole
+    {{- end }}
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1

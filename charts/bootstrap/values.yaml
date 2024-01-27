@@ -17,6 +17,10 @@ unbound:
   enabled: true
   loadBalancerIP: 192.168.1.5
 
+pihole:
+  enabled: true
+  loadBalancerIP: 192.168.1.8
+
 esphome:
   enabled: true
 

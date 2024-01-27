@@ -28,6 +28,13 @@ spec:
               memory: 200Mi
             limits:
               memory: 200Mi
+          ports:
+            - name: dns-tcp
+              containerPort: 5335
+              protocol: TCP
+            - name: dns-udp
+              containerPort: 5335
+              protocol: UDP 
       volumes:
         - name: unbound-config-volume
           configMap:

@@ -8,19 +8,26 @@ spec:
     namespace: pihole
     server: 'https://kubernetes.default.svc'
   source:
-    path: charts/pihole
-    repoURL: 'https://github.com/Adi146/home-cluster.git'
-    targetRevision: HEAD
+    repoURL: 'https://mojo2600.github.io/pihole-kubernetes/'
+    targetRevision: 2.21.0
     helm:
       parameters:
-        - name: domain
-          value: pihole.{{ .Values.domain }}
-        - name: loadBalancerIP
-          value: {{ .Values.pihole.loadBalancerIP }}
-        - name: webtheme
-          value: default-dark
-        - name: pihole.dns_
+        - name: DNS1
           value: {{ .Values.unbound.loadBalancerIP }}
+        - name: serviceDns.loadBalancerIP
+          value: {{ .Values.pihole.loadBalancerIP }}
+        - name: serviceDhcp.enabled
+          value: 'false'
+        - name: serviceDns.type
+          value: LoadBalancer
+        - name: admin.enabled
+          value: 'false'
+      values: |
+        extraEnvVars:
+          DNSMASQ_USER: root
+        serviceDns:
+          annotations:
+            metallb.universe.tf/allow-shared-ip: pihole-svc
   project: default
   syncPolicy:
     syncOptions:

@@ -22,6 +22,7 @@ spec:
           ingress:
             annotations:
               cert-manager.io/cluster-issuer: letsencrypt-prod
+              nginx.ingress.kubernetes.io/backend-protocol: HTTPS
             enabled: true
             hostname: argo-cd.{{ .Values.domain }}
             ingressClassName: nginx-internal

@@ -1,0 +1,46 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: audiobookshelf-internal-ing
+spec:
+  ingressClassName: nginx-internal
+  tls:
+  - hosts:
+    - {{ .Values.domain }}
+    secretName: audiobookshelf-tls-secret
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: audiobookshelf-svc
+            port:
+              name: web
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: audiobookshelf-external-ing
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  ingressClassName: nginx-external
+  tls:
+  - hosts:
+    - {{ .Values.domain }}
+    secretName: audiobookshelf-tls-secret
+  rules:
+  - host: {{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: audiobookshelf-svc
+            port:
+              name: web

@@ -30,6 +30,9 @@ home_assistant:
 vaultwarden:
   enabled: true
 
+audiobookshelf:
+  enabled: true
+
 nfs_subdir_external_provisioner:
   enabled: true
   server: 192.168.1.2

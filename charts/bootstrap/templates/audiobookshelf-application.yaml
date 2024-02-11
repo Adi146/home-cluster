@@ -1,0 +1,23 @@
+{{ if .Values.audiobookshelf.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: audiobookshelf
+spec:
+  destination:
+    namespace: audiobookshelf
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/audiobookshelf
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: domain
+          value: audiobookshelf.{{ .Values.domain }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}
+{{ end }}

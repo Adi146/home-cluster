@@ -11,22 +11,39 @@ spec:
     targetRevision: 6.0.11
     chart: argo-cd
     helm:
-      valuesObject:
-        applicationSet:
-          enabled: false
-        dex:
-          enabled: false
-        notifications:
-          enabled: false
-        server:
-          ingress:
-            annotations:
-              cert-manager.io/cluster-issuer: letsencrypt-prod
-              nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-            enabled: true
-            hostname: argo-cd.{{ .Values.domain }}
-            ingressClassName: nginx-internal
-            tls: true
+      parameters:
+        - name: dex.enabled
+          value: 'false'
+        - name: notifications.enabled
+          value: 'false'
+        - name: applicationSet.enabled
+          value: 'false'
   project: default
   syncPolicy:
     automated: {}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argo-cd-ing
+  namespace: argo-cd
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: HTTPS
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx-internal
+  tls:
+  - hosts:
+    - argo-cd.{{ .Values.domain }}
+    secretName: argo-cd-tls-secret
+  rules:
+  - host: argo-cd.{{ .Values.domain }}
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: argo-cd-argocd-server
+            port:
+              name: https

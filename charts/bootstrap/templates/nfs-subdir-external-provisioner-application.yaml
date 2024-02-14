@@ -1,4 +1,3 @@
-{{ if .Values.nfs_subdir_external_provisioner.enabled }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -27,4 +26,3 @@ spec:
     syncOptions:
     - CreateNamespace=true
     automated: {}
-{{ end }}

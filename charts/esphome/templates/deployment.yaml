@@ -28,6 +28,10 @@ spec:
           - name: web
             containerPort: 6052
             protocol: TCP
+        securityContext:
+          capabilities:
+            add:
+              - NET_RAW
       volumes:
       - name: esphome-volume
         persistentVolumeClaim:

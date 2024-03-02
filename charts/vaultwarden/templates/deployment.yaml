@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: vaultwarden
-        image: vaultwarden/server:1.30.4
+        image: vaultwarden/server:1.30.5
         volumeMounts:
         - name: vaultwarden-volume
           mountPath: /data

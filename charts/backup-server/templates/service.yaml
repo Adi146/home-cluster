@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: unifi-controller-udp-svc
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.loadBalancerIP }}
+spec:
+  type: LoadBalancer
+  ports:
+    - name: ssh
+      port: 2222
+      protocol: TCP
+  selector:
+    app: backup-server

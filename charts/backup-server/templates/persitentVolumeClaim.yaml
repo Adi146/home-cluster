@@ -1,0 +1,36 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup-server-data-pvc
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup-server-key-pvc
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Mi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup-server-host-keys-pvc
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Mi

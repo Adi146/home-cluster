@@ -36,11 +36,12 @@ metadata:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   addresses: 
-    - {{ .Values.internal_ingress.loadBalancerIP }}/32 # ingress-nginx-internal
-    - {{ .Values.unbound.loadBalancerIP}}/32 # unbound
-    - {{ .Values.external_ingress.loadBalancerIP }}/32 # ingress-nginx-external
-    - {{ .Values.unifi_controller.loadBalancerIP }}/32 # unifi-controller
-    - {{ .Values.pihole.loadBalancerIP }}/32 # pihole
+    - {{ .Values.internal_ingress.loadBalancerIP }}/32
+    - {{ .Values.unbound.loadBalancerIP}}/32
+    - {{ .Values.external_ingress.loadBalancerIP }}/32
+    - {{ .Values.unifi_controller.loadBalancerIP }}/32
+    - {{ .Values.pihole.loadBalancerIP }}/32
+    - {{ .Values.backup-server.loadBalancerIP }}/32
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1

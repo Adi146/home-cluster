@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backup-server
+spec:
+  destination:
+    namespace: backup-server
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/backup-server
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: loadBalancerIP
+          value: {{ .Values.backup_server.loadBalancerIP }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}

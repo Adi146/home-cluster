@@ -1,0 +1,59 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: backup-server
+  labels:
+    app: backup-server
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backup-server
+  template:
+    metadata:
+      labels:
+        app: backup-server
+    spec:
+      containers:
+        - name: backup-server
+          image: quay.io/panubo/sshd:1.8.0
+          volumeMounts:
+            - name: backup-server-data-volume
+              mountPath: /data
+            - name: backup-server-key-volume
+              mountPath: /etc/authorized_keys
+            - name: backup-server-host-keys-volume
+              mountPath: /etc/ssh/keys
+          env: 
+            - name: RSYNC_MODE
+              value: "true"
+            - name: SSH_USERS
+              value: user:1000:1000
+            - name: SSH_ENABLE_ROOT
+              value: "false"
+          resources:  
+            requests:
+              memory: 50Mi
+            limits:
+              memory: 50Mi
+          ports:
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add:
+                - SYS_CHROOT
+      volumes:
+        - name: backup-server-data-volume
+          persistentVolumeClaim:
+            claimName: backup-server-data-pvc
+        - name: backup-server-key-volume
+          persistentVolumeClaim:
+            claimName: backup-server-key-pvc
+        - name: backup-server-host-keys-volume
+          persistentVolumeClaim:
+            claimName: backup-server-host-keys-pvc

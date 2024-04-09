@@ -41,7 +41,7 @@ spec:
     - {{ .Values.external_ingress.loadBalancerIP }}/32
     - {{ .Values.unifi_controller.loadBalancerIP }}/32
     - {{ .Values.pihole.loadBalancerIP }}/32
-    - {{ .Values.backup-server.loadBalancerIP }}/32
+    - {{ .Values.backup_server.loadBalancerIP }}/32
   autoAssign: false
 ---
 apiVersion: metallb.io/v1beta1

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: backup-client
+spec:
+  destination:
+    namespace: backup-client
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: charts/backup-client
+    repoURL: 'https://github.com/Adi146/home-cluster.git'
+    targetRevision: HEAD
+    helm:
+      parameters:
+        - name: targetServer
+          value: {{ .Values.backup_server.loadBalancerIP }}
+        - name: sourcePath
+          value: {{ .Values.nfs_subdir_external_provisioner.path }}
+        - name: sourceServer
+          value: {{ .Values.nfs_subdir_external_provisioner.server }}
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}

@@ -1,0 +1,39 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup-client-source-volume-pvc
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Mi
+  volumeName: backup-client-source-volume
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: backup-client-source-volume
+spec:
+  capacity:
+    storage: 200Mi
+  accessModes:
+    - ReadOnlyMany
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  nfs:
+    path: "{{ .Values.sourcePath }}"
+    server: "{{ .Values.sourceServer }}"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: backup-client-key-pvc
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 200Mi

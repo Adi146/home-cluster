@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-client
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: backup
+              image: alpine:3.19
+              args:
+                - |
+                  apk add --no-cache rsync openssh;
+                  date=`date "+%Y-%m-%dT%H_%M_%S"`;
+                  rsync -avP -e 'ssh -p 2222' --link-dest= ../current $SOURCEDIR $BACKUPSERVER:$BACKUPDIR/back-$date;
+                  ssh $BACKUPSERVER -c "
+                    rm -f $BACKUPDIR/current; 
+                    ln -s back-$date $BACKUPDIR/current;
+                    find $BACKUPDIR -maxdepth 1 -type d -mtime +14 -print -prune -exec rm -rv {} +;"
+              command:
+                - sh
+                - -c
+              env:
+                - name: SOURCEDIR
+                  value: /source
+                - name: BACKUPDIR
+                  value: /data
+                - name: BACKUPSERVER
+                  value: user@{{ .Values.targetServer }}
+              volumeMounts:
+                - mountPath: /source
+                  name: backup-client-source-volume
+                - mountPath: /root/.ssh
+                  name: backup-client-key-volume
+          volumes:
+            - name: backup-client-source-volume
+              persistentVolumeClaim:
+                claimName: backup-client-source-volume-pvc
+            - name: backup-client-key-volume
+              persistentVolumeClaim:
+                claimName: backup-client-key-pvc
+  schedule: '@midnight'
+  successfulJobsHistoryLimit: 3
+  suspend: false

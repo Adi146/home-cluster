@@ -28,8 +28,6 @@ spec:
             - name: backup-server-host-keys-volume
               mountPath: /etc/ssh/keys
           env: 
-            - name: RSYNC_MODE
-              value: "true"
             - name: SSH_USERS
               value: user:1000:1000
             - name: SSH_ENABLE_ROOT

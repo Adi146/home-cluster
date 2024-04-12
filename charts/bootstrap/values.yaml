@@ -17,7 +17,7 @@ pihole:
   loadBalancerIP: 192.168.1.8
 
 backup_server:
-  loadBalancerIP: 192.268.1.9
+  loadBalancerIP: 192.168.1.9
 
 nfs_subdir_external_provisioner:
   server: 192.168.1.2

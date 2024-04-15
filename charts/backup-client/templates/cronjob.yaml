@@ -17,17 +17,17 @@ spec:
                 - |
                   apk add --no-cache rsync openssh;
                   date=`date "+%Y-%m-%dT%H_%M_%S"`;
-                  rsync -avP -e 'ssh -p 2222' --link-dest= ../current $SOURCEDIR $BACKUPSERVER:$BACKUPDIR/back-$date;
-                  ssh $BACKUPSERVER -c "
+                  rsync -avP -e 'ssh -p 2222' --link-dest=../current --exclude=backup-server $SOURCEDIR $BACKUPSERVER:$BACKUPDIR/back-$date;
+                  ssh -p 2222 $BACKUPSERVER "
                     rm -f $BACKUPDIR/current; 
-                    ln -s back-$date $BACKUPDIR/current;
+                    ln -s ./back-$date $BACKUPDIR/current;
                     find $BACKUPDIR -maxdepth 1 -type d -mtime +14 -print -prune -exec rm -rv {} +;"
               command:
                 - sh
                 - -c
               env:
                 - name: SOURCEDIR
-                  value: /source
+                  value: /source/*
                 - name: BACKUPDIR
                   value: /data
                 - name: BACKUPSERVER

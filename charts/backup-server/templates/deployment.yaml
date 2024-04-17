@@ -24,14 +24,14 @@ spec:
             - name: backup-server-data-volume
               mountPath: /data
             - name: backup-server-key-volume
-              mountPath: /etc/authorized_keys
+              mountPath: /root/.ssh
             - name: backup-server-host-keys-volume
               mountPath: /etc/ssh/keys
           env: 
             - name: SSH_USERS
               value: user:1000:1000
             - name: SSH_ENABLE_ROOT
-              value: "false"
+              value: "true"
           resources:  
             requests:
               memory: 50Mi

@@ -34,9 +34,9 @@ spec:
               value: "true"
           resources:  
             requests:
-              memory: 50Mi
+              memory: 200Mi
             limits:
-              memory: 50Mi
+              memory: 200Mi
           ports:
             - name: ssh
               containerPort: 22

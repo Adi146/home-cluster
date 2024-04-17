@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: piper-svc
+spec:
+  ports:
+  - name: voice
+    port: 10200
+    targetPort: voice
+  selector:
+    app: piper

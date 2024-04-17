@@ -1,0 +1,43 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: piper
+  labels:
+    app: piper
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: piper
+  template:
+    metadata:
+      labels:
+        app: piper
+    spec:
+      containers:
+        - name: piper
+          image: rhasspy/wyoming-piper:1.5.0
+          volumeMounts:
+          - name: piper-volume
+            mountPath: /data
+          command:
+            - bash
+            - /run.sh
+            - --voice 
+            - de_DE-thorsten-high
+          resources:
+            requests:
+              memory: 200Mi
+            limits:
+              memory: 200Mi
+          ports:
+            - name: voice
+              containerPort: 10200
+              protocol: TCP
+      volumes:
+        - name: piper-volume
+          persistentVolumeClaim:
+            claimName: piper-pvc

@@ -1,0 +1,45 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: whisper
+  labels:
+    app: whisper
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whisper
+  template:
+    metadata:
+      labels:
+        app: whisper
+    spec:
+      containers:
+        - name: whisper
+          image: rhasspy/wyoming-whisper:2.1.0
+          volumeMounts:
+          - name: whisper-volume
+            mountPath: /data
+          command:
+            - bash
+            - /run.sh
+            - --model 
+            - tiny-int8
+            - --language
+            - de
+          resources:
+            requests:
+              memory: 400Mi
+            limits:
+              memory: 400Mi
+          ports:
+            - name: voice
+              containerPort: 10300
+              protocol: TCP
+      volumes:
+        - name: whisper-volume
+          persistentVolumeClaim:
+            claimName: whisper-pvc

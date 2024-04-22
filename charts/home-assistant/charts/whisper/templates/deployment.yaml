@@ -34,9 +34,9 @@ spec:
             - "2"
           resources:
             requests:
-              memory: 400Mi
+              memory: 2Gi
             limits:
-              memory: 400Mi
+              memory: 2Gi
           ports:
             - name: voice
               containerPort: 10300

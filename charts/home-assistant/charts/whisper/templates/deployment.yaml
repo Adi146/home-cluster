@@ -27,9 +27,11 @@ spec:
             - bash
             - /run.sh
             - --model 
-            - tiny-int8
+            - medium
             - --language
             - de
+            - --beam-size
+            - "2"
           resources:
             requests:
               memory: 400Mi

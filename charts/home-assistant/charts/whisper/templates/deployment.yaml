@@ -27,11 +27,11 @@ spec:
             - bash
             - /run.sh
             - --model 
-            - medium
+            - medium-int8
             - --language
             - de
             - --beam-size
-            - "2"
+            - "1"
           ports:
             - name: voice
               containerPort: 10300

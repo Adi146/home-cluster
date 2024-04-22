@@ -32,11 +32,6 @@ spec:
             - de
             - --beam-size
             - "2"
-          resources:
-            requests:
-              memory: 2Gi
-            limits:
-              memory: 2Gi
           ports:
             - name: voice
               containerPort: 10300

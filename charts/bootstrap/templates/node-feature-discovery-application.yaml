@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-feature-discovery
+spec:
+  destination:
+    namespace: node-feature-discovery
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://kubernetes-sigs.github.io/node-feature-discovery/charts'
+    targetRevision: 0.15.4
+    chart: node-feature-discovery
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}

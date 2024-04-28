@@ -8,7 +8,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://nvidia.github.io/gpu-feature-discovery'
-    targetRevision: 0.8.2
+    targetRevision: 0.15.0
     chart: gpu-feature-discovery
   project: default
   syncPolicy:

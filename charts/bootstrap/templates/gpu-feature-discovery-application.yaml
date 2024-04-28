@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gpu-feature-discovery
+spec:
+  destination:
+    namespace: gpu-feature-discovery
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://nvidia.github.io/gpu-feature-discovery'
+    targetRevision: 0.8.2
+    chart: gpu-feature-discovery
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: {}

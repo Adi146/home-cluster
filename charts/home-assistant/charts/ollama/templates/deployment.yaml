@@ -1,0 +1,38 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ollama
+  labels:
+    app: ollama
+spec:
+  strategy: 
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+        - name: ollama
+          image: ollama/ollama:0.1.32
+          command:
+            - llama2
+          volumeMounts:
+            - name: ollama-volume
+              mountPath: /root/.ollama
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+          ports:
+            - name: interface
+              containerPort: 11434
+              protocol: TCP
+      volumes:
+        - name: ollama-volume
+          persistentVolumeClaim:
+            claimName: ollama-pvc

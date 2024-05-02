@@ -20,14 +20,9 @@ spec:
       containers:
         - name: ollama
           image: ollama/ollama:0.1.32
-          command:
-            - llama2
           volumeMounts:
             - name: ollama-volume
               mountPath: /root/.ollama
-          resources:
-            limits:
-              nvidia.com/gpu: "1"
           ports:
             - name: interface
               containerPort: 11434

@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: paperless-ngx
-          image: ghcr.io/paperless-ngx/paperless-ngx:2.8.5
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.8.6
           volumeMounts:
             - name: paperless-ngx-media
               mountPath: /usr/src/paperless/media

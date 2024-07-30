@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: redis
-          image: redis:7.2.5-alpine
+          image: redis:7.4.0-alpine
           volumeMounts:
             - name: paperless-ngx-redis-volume
               mountPath: /data

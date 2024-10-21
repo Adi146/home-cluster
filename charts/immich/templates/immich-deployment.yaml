@@ -37,8 +37,6 @@ spec:
           resources:
             requests:
               memory: 1Gi
-            limits:
-              memory: 1Gi
           ports:
             - name: web
               containerPort: 2283

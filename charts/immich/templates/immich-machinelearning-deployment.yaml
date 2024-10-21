@@ -23,9 +23,9 @@ spec:
               mountPath: /cache
           resources:
             requests:
-              memory: 500Mi
+              memory: 1Gi
             limits:
-              memory: 500Mi
+              memory: 1Gi
           ports:
             - name: api
               containerPort: 3003

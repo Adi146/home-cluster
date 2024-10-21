@@ -1,0 +1,38 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: immich-machinelearning
+  labels:
+    app: immich-machinelearning
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-machinelearning
+  template:
+    metadata:
+      labels:
+        app: immich-machinelearning
+    spec:
+      containers:
+        - name: immich-machinelearning
+          image: ghcr.io/immich-app/immich-machine-learning:v1.118.2
+          volumeMounts:
+            - name: immich-machinelearning
+              mountPath: /cache
+          resources:
+            requests:
+              memory: 500Mi
+            limits:
+              memory: 500Mi
+          ports:
+            - name: api
+              containerPort: 3003
+              protocol: TCP
+      volumes:
+        - name: immich-machinelearning
+          persistentVolumeClaim:
+            claimName: immich-machinelearning-pvc 
+
+

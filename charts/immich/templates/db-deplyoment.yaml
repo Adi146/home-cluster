@@ -1,0 +1,43 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: immich-db
+  labels:
+    app: immich-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-db
+  template:
+    metadata:
+      labels:
+        app: immich-db
+    spec:
+      containers:
+        - name: db
+          image: tensorchord/pgvecto-rs:pg16-v0.3.0
+          volumeMounts:
+            - name: immich-db-volume
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: POSTGRES_DB
+              value: immich
+            - name: POSTGRES_USER
+              value: immich
+            - name: POSTGRES_PASSWORD
+              value: immich
+          resources:
+            requests:
+              memory: 200Mi
+            limits:
+              memory: 200Mi
+          ports:
+            - name: db
+              containerPort: 5432
+              protocol: TCP
+      volumes:
+      - name: immich-db-volume
+        persistentVolumeClaim:
+          claimName: immich-db-pvc

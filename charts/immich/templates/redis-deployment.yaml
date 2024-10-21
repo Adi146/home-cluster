@@ -1,0 +1,37 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: immich-redis
+  labels:
+    app: immich-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: immich-redis
+  template:
+    metadata:
+      labels:
+        app: immich-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7.4.1-alpine
+          volumeMounts:
+            - name: immich-redis-volume
+              mountPath: /data
+          resources:
+            requests:
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          ports:
+            - name: redis
+              containerPort: 6379
+              protocol: TCP
+      volumes:
+      - name: immich-redis-volume
+        persistentVolumeClaim:
+          claimName: immich-redis-pvc
+

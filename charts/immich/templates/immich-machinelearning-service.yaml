@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: immich-machinelearning-svc
+spec:
+  ports:
+    - name: api
+      port: 3003
+      targetPort: api
+  selector:
+    app: immich-machinelearning

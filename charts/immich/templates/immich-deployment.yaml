@@ -36,9 +36,9 @@ spec:
               value: http://immich-machinelearning-svc:3003
           resources:
             requests:
-              memory: 500Mi
+              memory: 1Gi
             limits:
-              memory: 500Mi
+              memory: 1Gi
           ports:
             - name: web
               containerPort: 2283

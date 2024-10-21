@@ -24,8 +24,6 @@ spec:
           resources:
             requests:
               memory: 1Gi
-            limits:
-              memory: 1Gi
           ports:
             - name: api
               containerPort: 3003

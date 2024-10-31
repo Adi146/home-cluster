@@ -8,7 +8,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://nvidia.github.io/k8s-device-plugin'
-    targetRevision: 0.16.2
+    targetRevision: 0.17.0
     chart: nvidia-device-plugin
   project: default
   syncPolicy:

@@ -14,6 +14,8 @@ spec:
       parameters:
         - name: domain
           value: vaultwarden.{{ .Values.domain }}
+        - name: signups_allowed
+          value: "true"
   project: default
   syncPolicy:
     syncOptions:

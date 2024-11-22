@@ -1,0 +1,36 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mosquitto-mqtt
+  labels:
+    app: mosquitto-mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto-mqtt
+  template:
+    metadata:
+      labels:
+        app: mosquitto-mqtt
+    spec:
+      containers:
+        - name: mosquitto-mqtt
+          image: eclipse-mosquitto:2.0.20
+          volumeMounts:
+            - name: mosquitto-mqtt-config
+              mountPath: /mosquitto/config/
+          resources:
+            requests:
+              memory: 200Mi
+            limits:
+              memory: 200Mi
+          ports:
+            - name: mqtt
+              containerPort: 1883
+              protocol: TCP
+      volumes:
+        - name: mosquitto-mqtt-config
+          configMap:
+            name: mosquitto-mqtt-config

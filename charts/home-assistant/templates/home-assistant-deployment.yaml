@@ -23,6 +23,8 @@ spec:
           volumeMounts:
           - name: home-assistant-volume
             mountPath: /config
+          - name: dockerenv # workaround for https://github.com/home-assistant/core/issues/133537
+            mountPath: /.dockerenv            
           command: ["/bin/ash","-c","pip install pymysql && /init"]
           resources:
             requests:
@@ -44,3 +46,6 @@ spec:
         - name: home-assistant-volume
           persistentVolumeClaim:
             claimName: home-assistant-pvc
+        - name: dockerenv
+          emptyDir: {}
+         

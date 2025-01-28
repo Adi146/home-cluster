@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: immich-machinelearning
-          image: ghcr.io/immich-app/immich-machine-learning:v1.125.3
+          image: ghcr.io/immich-app/immich-machine-learning:v1.125.6
           volumeMounts:
             - name: immich-machinelearning
               mountPath: /cache

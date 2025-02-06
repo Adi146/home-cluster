@@ -28,9 +28,9 @@ spec:
           command: ["/bin/ash","-c","pip install pymysql && /init"]
           resources:
             requests:
-              memory: 750Mi
+              memory: 1Gi
             limits:
-              memory: 750Mi
+              memory: 1Gi
           ports:
             - name: web
               containerPort: 8123

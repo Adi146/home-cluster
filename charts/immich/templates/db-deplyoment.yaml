@@ -30,9 +30,9 @@ spec:
               value: immich
           resources:
             requests:
-              memory: 200Mi
+              memory: 512Mi
             limits:
-              memory: 200Mi
+              memory: 512Mi
           ports:
             - name: db
               containerPort: 5432

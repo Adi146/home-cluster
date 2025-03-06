@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mosquitto-mqtt
-          image: eclipse-mosquitto:2.0.20
+          image: eclipse-mosquitto:2.0.21
           volumeMounts:
             - name: mosquitto-mqtt-config
               mountPath: /mosquitto/config/

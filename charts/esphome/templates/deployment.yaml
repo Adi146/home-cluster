@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: esphome
-        image: ghcr.io/esphome/esphome:2025.4.2
+        image: ghcr.io/esphome/esphome:2025.5.0
         volumeMounts:
         - name: esphome-volume
           mountPath: /config

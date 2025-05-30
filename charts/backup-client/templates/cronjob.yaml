@@ -12,7 +12,7 @@ spec:
           restartPolicy: Never
           containers:
             - name: backup
-              image: alpine:3.21
+              image: alpine:3.22
               args:
                 - |
                   apk add --no-cache rsync openssh;

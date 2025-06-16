@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: whisper
-          image: rhasspy/wyoming-whisper:2.4.0
+          image: rhasspy/wyoming-whisper:2.5.0
           volumeMounts:
           - name: whisper-volume
             mountPath: /data

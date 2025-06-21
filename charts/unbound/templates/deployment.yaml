@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: unbound
-          image: crazymax/unbound:1.22.0
+          image: crazymax/unbound:1.23.0
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: unbound-config-volume

@@ -8,7 +8,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://metallb.github.io/metallb'
-    targetRevision: 0.15.2
+    targetRevision: 0.15.3
     chart: metallb
   project: default
   syncPolicy:

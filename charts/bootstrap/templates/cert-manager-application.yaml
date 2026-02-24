@@ -19,7 +19,7 @@ spec:
           nameservers:
             - 8.8.8.8
     repoURL: https://charts.jetstack.io
-    targetRevision: v1.19.3
+    targetRevision: v1.19.4
   syncPolicy:
     automated: {}
     syncOptions:
